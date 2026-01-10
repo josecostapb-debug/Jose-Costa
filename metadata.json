@@ -1,6 +1,6 @@
 {
-  "name": "AquaPro - Gestão de Treinos ",
-  "description": "Um aplicativo premium para personal trainers de natação e hidroginástica gerenciarem alunos, prescreverem treinos detalhados por grupos musculares e acompanharem o progresso semanal com auxílio de IA.",
+  "name": "PersonalPro - Gestão de Treinos",
+  "description": "Um aplicativo premium para personal trainers multi-modalidade gerenciarem alunos, prescreverem treinos detalhados por grupos musculares e acompanharem o progresso semanal com auxílio de IA.",
   "requestFramePermissions": [
     "camera",
     "microphone"

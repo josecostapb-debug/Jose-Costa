@@ -18,14 +18,25 @@ export const getAITrainingTip = async (studentName: string, level: string, modal
   }
 };
 
-export const chatWithAI = async (message: string, students: Student[]) => {
+export const chatWithAI = async (message: string, context: Student[]) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    const studentsContext = students.map(s => `${s.name} (${s.modality}, nível ${s.level})`).join(", ");
-    const systemInstruction = `Você é o assistente inteligente do AquaPro. 
-    Sua função é ajudar o Personal Trainer com informações técnicas de Natação, Hidroginástica, Musculação e Pilates.
-    Você conhece os seguintes alunos: ${studentsContext}.
-    Seja profissional, motivador e técnico. Responda de forma concisa sobre qualquer uma das 4 áreas.`;
+    const contextStr = context.map(s => `${s.name} (${s.modality}, nível ${s.level}, objetivo: ${s.goal || 'não definido'})`).join(", ");
+    
+    const systemInstruction = `Você é o assistente inteligente "Coach Digital" do PersonalPro. 
+    Sua missão é dar suporte tanto a treinadores quanto a praticantes independentes.
+    
+    PARA PRATICANTES INDEPENDENTES (Quem treina sozinho):
+    - Ajude-os a criar seu ambiente de treinos (Caminhada, Academia, Natação, Corrida).
+    - Dê orientações técnicas de como executar os exercícios com segurança.
+    - Sugira séries, repetições e tempos de descanso baseados nos objetivos deles.
+    - Incentive o registro de atividades no planejador do app.
+    
+    PARA TREINADORES:
+    - Atue como consultor técnico sobre fisiologia e biomecânica dos alunos.
+    
+    Atletas no contexto: ${contextStr}.
+    Seja profissional, empático e técnico. Responda sempre de forma concisa e útil em Português.`;
 
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',

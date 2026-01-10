@@ -12,7 +12,8 @@ export enum Modality {
   SWIMMING = 'Natação',
   WATER_AEROBICS = 'Hidroginástica',
   WEIGHTLIFTING = 'Musculação',
-  PILATES = 'Pilates'
+  PILATES = 'Pilates',
+  CYCLING = 'Bicicleta'
 }
 
 export enum AccountStatus {
@@ -20,6 +21,8 @@ export enum AccountStatus {
   OVERDUE = 'Atrasado',
   BLOCKED = 'Bloqueado'
 }
+
+export type UserRole = 'trainer' | 'student' | 'independent';
 
 export interface Exercise {
   id: string;
@@ -35,6 +38,7 @@ export interface WorkoutSet {
   series: number;
   reps: string;
   rest: string;
+  completed?: boolean;
 }
 
 export interface WeeklySheet {
